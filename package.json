@@ -1,0 +1,22 @@
+{
+  "name": "prp",
+  "version": "1.0.0",
+  "description": "password reverse proxy",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llambda/prp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llambda/prp/issues"
+  },
+  "homepage": "https://github.com/llambda/prp#readme",
+  "dependencies": {
+    "http-proxy": "^1.12.0"
+  }
+}
