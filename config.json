@@ -2,5 +2,5 @@
     "username": "test",
     "password": "test",
     "port": 7000,
-    "target": "http://www.example.com"
+    "target": "http://www.yahoo.com"
 }
