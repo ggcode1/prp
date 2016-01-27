@@ -7,49 +7,49 @@ const fs = require('fs');
 const net = require('net');
 const pem = Promise.promisifyAll(require('pem'));
 
-module.exports = function (config) {
-    const socket = new net.Server();
-    socket.listen(config.port);
-    
-    try {
-        process.setgid('nobody');
-        process.setuid('nobody');
-        process.setegid('nobody');
-        process.seteuid('nobody');
-    } catch (e) {
-        console.error(e);
-    }
+module.exports = function(config) {
+	const socket = new net.Server();
+	socket.listen(config.port);
 
-    Promise.coroutine(function* () {
-        const auth = 'Basic ' + new Buffer(config.username + ":" + config.password).toString('base64');
+	try {
+		process.setgid('nobody');
+		process.setuid('nobody');
+		process.setegid('nobody');
+		process.seteuid('nobody');
+	} catch (e) {
+		console.error(e);
+	}
 
-        const keys = yield pem.createCertificateAsync({
-            days: 1,
-            selfSigned: true
-        }); // generate a cert/keypair on the fly
+	Promise.coroutine(function*() {
+		const auth = 'Basic ' + new Buffer(config.username + ":" + config.password).toString('base64');
 
-        const options = {
-            key: keys.serviceKey,
-              cert: keys.certificate
-        };
+		const keys = yield pem.createCertificateAsync({
+			days: 1,
+			selfSigned: true
+		}); // generate a cert/keypair on the fly
 
-        function validAuth(req) {
-            return req.headers['authorization'] && req.headers['authorization'] === auth
-        }
+		const options = {
+			key: keys.serviceKey,
+			cert: keys.certificate
+		};
 
-        https.createServer(options, function(req, res) {
-            if (!validAuth(req)) {
-                res.writeHead(401, {
-                    'WWW-Authenticate': 'Basic realm="users"'
-                });
-                res.end();
-            } else
-                proxy.web(req, res, {
-                    target: config.target
-                });
-        }).listen(socket);
+		function validAuth(req) {
+			return req.headers['authorization'] && req.headers['authorization'] === auth
+		}
 
-        console.log('prp listening on https://localhost:' + config.port);
+		https.createServer(options, function(req, res) {
+			if (!validAuth(req)) {
+				res.writeHead(401, {
+					'WWW-Authenticate': 'Basic realm="users"'
+				});
+				res.end();
+			} else
+				proxy.web(req, res, {
+					target: config.target
+				});
+		}).listen(socket);
 
-    })();
+		console.log('prp listening on https://localhost:' + config.port);
+
+	})();
 }
