@@ -43,10 +43,16 @@ module.exports = function(config) {
 					'WWW-Authenticate': 'Basic realm="users"'
 				});
 				res.end();
-			} else
+			} else {
 				proxy.web(req, res, {
 					target: config.target
 				});
+				proxy.on('error', function (err) {
+					console.error(err);
+					res.end();
+				})
+			}
+
 		}).listen(socket);
 
 		console.log('prp listening on https://localhost:' + config.port);
