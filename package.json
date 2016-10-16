@@ -21,10 +21,10 @@
   ],
   "homepage": "https://github.com/llambda/prp#readme",
   "dependencies": {
-    "bluebird": "^3.1.4",
+    "bluebird": "^3.4.6",
     "commander": "^2.9.0",
-    "http-proxy": "^1.12.1",
-    "pem": "^1.8.1"
+    "http-proxy": "^1.15.1",
+    "pem": "^1.8.3"
   },
   "bin": {
     "prp": "./prp.js"
