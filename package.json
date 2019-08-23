@@ -1,6 +1,6 @@
 {
 	"name": "prp",
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"description": "password reverse proxy",
 	"main": "proxy.js",
 	"scripts": {
