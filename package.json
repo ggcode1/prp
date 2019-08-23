@@ -1,32 +1,34 @@
 {
-  "name": "prp",
-  "version": "1.0.2",
-  "description": "password reverse proxy",
-  "main": "proxy.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/llambda/prp.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/llambda/prp/issues"
-  },
-  "files": [
-    "proxy.js",
-    "prp.js"
-  ],
-  "homepage": "https://github.com/llambda/prp#readme",
-  "dependencies": {
-    "bluebird": "^3.4.6",
-    "commander": "^2.9.0",
-    "http-proxy": "^1.15.1",
-    "pem": "^1.8.3"
-  },
-  "bin": {
-    "prp": "./prp.js"
-  }
+	"name": "prp",
+	"version": "1.0.2",
+	"description": "password reverse proxy",
+	"main": "proxy.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/llambda/prp.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/llambda/prp/issues"
+	},
+	"files": [
+		"proxy.js",
+		"prp.js"
+	],
+	"homepage": "https://github.com/llambda/prp#readme",
+	"dependencies": {
+		"commander": "^3.0.0",
+		"http-proxy": "^1.17.0",
+		"pem": "^1.14.2"
+	},
+	"bin": {
+		"prp": "./prp.js"
+	},
+	"engines": {
+		"node": ">=8"
+	}
 }

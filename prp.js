@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const util = require('util');
+const readFile = util.promisify(require('fs').readFile);
 const program = require('commander');
 const packagejson = require('./package.json');
 
@@ -25,8 +25,8 @@ if (!program.config) {
     program.help();
 }
 
-Promise.coroutine(function* () {
-	let config = yield fs.readFileAsync(program.config);
+(async function () {
+	let config = await readFile(program.config);
 	config = JSON.parse(config);
 
 	proxy(config);

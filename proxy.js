@@ -1,13 +1,13 @@
 'use strict';
-const Promise = require('bluebird');
+const util = require('util');
 const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer();
 const https = require('https');
 const fs = require('fs');
 const net = require('net');
-const pem = Promise.promisifyAll(require('pem'));
+const createCertificate = util.promisify(require('pem').createCertificate);
 
-module.exports = function(config) {
+module.exports = async function(config) {
 	const socket = new net.Server();
 	socket.listen(config.port);
 
@@ -20,10 +20,10 @@ module.exports = function(config) {
 		console.error(e);
 	}
 
-	Promise.coroutine(function*() {
+	await (async function() {
 		const auth = 'Basic ' + new Buffer(config.username + ":" + config.password).toString('base64');
 
-		const keys = yield pem.createCertificateAsync({
+		const keys = await createCertificate({
 			days: 1,
 			selfSigned: true
 		}); // generate a cert/keypair on the fly
